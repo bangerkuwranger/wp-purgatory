@@ -51,14 +51,15 @@ class Roots_Nav_Walker extends Walker_Nav_Menu {
 
 /**
  * Remove the id="" on nav menu items
- * Return 'menu-slug' for nav menu classes
+ * Return 'menu-slug menu-item-object-object' for nav menu classes (change from default, for compatibility with AJAX plugin)
  */
 function roots_nav_menu_css_class($classes, $item) {
   $slug = sanitize_title($item->title);
+  $object = sanitize_title($item->object);
   $classes = preg_replace('/(current(-menu-|[-_]page[-_])(item|parent|ancestor))/', 'active', $classes);
   $classes = preg_replace('/^((menu|page)[-_\w+]+)+/', '', $classes);
 
-  $classes[] = 'menu-' . $slug;
+  $classes[] = 'menu-' . $slug . ' menu-item-object-' . $object;
 
   $classes = array_unique($classes);
 
